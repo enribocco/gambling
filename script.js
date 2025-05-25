@@ -65,6 +65,10 @@ function loadGameData() {
 
     if (savedCredits !== null) {
         credits = parseInt(savedCredits, 10);
+    } else {
+        // Imposta i crediti iniziali a 100€ per il primo avvio
+        credits = 100;
+        saveGameData(); // Salva i dati iniziali
     }
 
     if (savedScore !== null) {
@@ -83,6 +87,18 @@ function loadPurchasedItems() {
     addPurchasedItem("default-dark", true);
 
     savedItems.forEach(style => addPurchasedItem(style));
+
+    // Controlla se tutti i temi sono stati acquistati
+    checkAllThemesPurchased();
+}
+
+// Controlla se tutti i temi sono stati acquistati
+function checkAllThemesPurchased() {
+    const shopItems = document.querySelectorAll(".shop-item");
+    if (shopItems.length === 0) {
+        const shopMessage = document.querySelector("#shop-modal p");
+        shopMessage.textContent = "Hai acquistato tutti i temi disponibili, attivali premendo lo zaino a sinistra!";
+    }
 }
 
 // Modifica la funzione addPurchasedItem per gestire il tema predefinito
@@ -105,6 +121,9 @@ function addPurchasedItem(style, isDefault = false) {
             i.textContent.split(" ")[1]
         );
         localStorage.setItem("purchasedItems", JSON.stringify(purchasedItems));
+
+        // Controlla se tutti i temi sono stati acquistati
+        checkAllThemesPurchased();
     }
 }
 
@@ -128,6 +147,11 @@ shopBoosts.forEach(boost => {
     boost.addEventListener("click", () => {
         const boostType = boost.dataset.boost;
         const cost = parseInt(boost.dataset.cost, 10);
+
+        // Controlla se un boost è già attivo
+        if (isDoublePrizeActive) {
+            return; // Non fare nulla se un boost è già attivo
+        }
 
         if (credits >= cost) {
             credits -= cost;

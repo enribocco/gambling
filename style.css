@@ -432,3 +432,60 @@ button.purple:hover {
     background: linear-gradient(135deg, #3a3a80, #1a1a40); /* Caratteristiche di dark */
     box-shadow: 0 0 15px #00d4ff;
 }
+
+/* Media query per dispositivi mobili */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 2rem;
+        margin-top: 10px;
+    }
+
+    #game-info {
+        font-size: 1rem;
+        margin: 5px 0;
+    }
+
+    #scratch-card {
+        grid-template-columns: repeat(2, 80px); /* 2 colonne per schermi piccoli */
+        grid-gap: 8px;
+        margin: 10px auto;
+    }
+
+    .card {
+        width: 80px;
+        height: 80px;
+        font-size: 16px;
+    }
+
+    .shop-button,
+    .purchased-button {
+        width: 35px;
+        height: 35px;
+        font-size: 1.2rem;
+    }
+
+    .modal-content {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .shop-item,
+    .purchased-item {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+    }
+
+    .purchased-items {
+        width: 95%;
+    }
+
+    #win-message {
+        font-size: 1rem;
+        margin-top: 15px;
+    }
+}

@@ -113,7 +113,7 @@ shopItems.forEach(item => {
 
 // Applica uno stile alla pagina
 function applyStyle(style) {
-    document.body.classList.remove("dark", "light", "neon");
+    document.body.classList.remove("default-dark", "dark", "light", "neon");
     document.body.classList.add(style);
 
     // Salva il tema attivo nel localStorage
@@ -200,5 +200,5 @@ function resetGame() {
 // Inizializza il gioco
 loadGameData(); // Carica i crediti e il punteggio salvati
 loadPurchasedItems(); // Carica i temi acquistati
-applyStyle(localStorage.getItem("activeStyle") || "light"); // Applica il tema attivo o il tema predefinito
+applyStyle(localStorage.getItem("activeStyle") || "default-dark"); // Applica il tema attivo o il tema predefinito
 generateGrid(); // Genera la griglia

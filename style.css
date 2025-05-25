@@ -244,3 +244,45 @@ button.neon:hover {
     background: linear-gradient(135deg, #00d4ff, #00ffcc);
     box-shadow: 0 0 15px #00ffcc, 0 0 30px #00d4ff;
 }
+
+/* Tema Dark Predefinito */
+body.default-dark {
+    background: linear-gradient(135deg, #2b2b2b, #1e1e1e);
+    color: #dcdcdc;
+}
+
+.card.default-dark {
+    background: linear-gradient(135deg, #3a3a3a, #2b2b2b);
+    border: 2px solid #444;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    color: #dcdcdc;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card.default-dark:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+}
+
+.modal-content.default-dark {
+    background: #2b2b2b;
+    color: #dcdcdc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    border: 1px solid #444;
+}
+
+button.default-dark {
+    background: linear-gradient(135deg, #444, #555);
+    color: #dcdcdc;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+button.default-dark:hover {
+    background: linear-gradient(135deg, #555, #666);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+}

@@ -64,34 +64,40 @@ function loadGameData() {
     }
 
     updateCreditsDisplay();
-    scoreDisplay.textContent = `⭐ Punteggio: ${score}`;
+    scoreDisplay.textContent = `💰 Sacchi trovati: ${score}`;
 }
 
 // Carica i temi acquistati dal localStorage
 function loadPurchasedItems() {
     const savedItems = JSON.parse(localStorage.getItem("purchasedItems")) || [];
+    
+    // Aggiungi il tema predefinito come opzione
+    addPurchasedItem("default-dark", true);
+
     savedItems.forEach(style => addPurchasedItem(style));
 }
 
-// Aggiungi un oggetto acquistato alla lista
-function addPurchasedItem(style) {
+// Modifica la funzione addPurchasedItem per gestire il tema predefinito
+function addPurchasedItem(style, isDefault = false) {
     const item = document.createElement("div");
     item.classList.add("purchased-item");
-    item.textContent = `Tema ${style}`;
+    item.textContent = isDefault ? "Tema Default" : `Tema ${style}`;
     item.addEventListener("click", () => applyStyle(style));
     purchasedList.appendChild(item);
 
-    // Rimuovi l'oggetto dallo shop
-    const shopItem = document.querySelector(`.shop-item[data-style="${style}"]`);
-    if (shopItem) {
-        shopItem.remove();
-    }
+    if (!isDefault) {
+        // Rimuovi l'oggetto dallo shop solo se non è il tema predefinito
+        const shopItem = document.querySelector(`.shop-item[data-style="${style}"]`);
+        if (shopItem) {
+            shopItem.remove();
+        }
 
-    // Salva i temi acquistati nel localStorage
-    const purchasedItems = [...document.querySelectorAll(".purchased-item")].map(i =>
-        i.textContent.split(" ")[1]
-    );
-    localStorage.setItem("purchasedItems", JSON.stringify(purchasedItems));
+        // Salva i temi acquistati nel localStorage
+        const purchasedItems = [...document.querySelectorAll(".purchased-item:not(:first-child)")].map(i =>
+            i.textContent.split(" ")[1]
+        );
+        localStorage.setItem("purchasedItems", JSON.stringify(purchasedItems));
+    }
 }
 
 // Acquista uno stile
@@ -114,7 +120,7 @@ shopItems.forEach(item => {
 
 // Applica uno stile alla pagina
 function applyStyle(style) {
-    document.body.classList.remove("default-dark", "dark", "light", "neon");
+    document.body.classList.remove("default-dark", "purple", "neon"); // Cambia "dark" in "purple"
     document.body.classList.add(style);
 
     // Salva il tema attivo nel localStorage
@@ -124,7 +130,7 @@ function applyStyle(style) {
 // Aggiorna i crediti
 function updateCreditsDisplay() {
     const creditsDisplay = document.getElementById("credits");
-    creditsDisplay.textContent = `💳 Crediti: ${credits}€`;
+    creditsDisplay.textContent = ` 💳 Crediti: ${credits}€`;
 }
 
 // Genera la griglia
@@ -164,7 +170,7 @@ function revealCard() {
             foundPrizes++;
             score += 1; // Incrementa il punteggio totale
             saveGameData(); // Salva i dati aggiornati
-            scoreDisplay.textContent = `⭐ Punteggio: ${score}`;
+            scoreDisplay.textContent = `💰 Sacchi trovati: ${score}`;
         }
 
         // Controlla se tutte le caselle sono state aperte
@@ -201,5 +207,5 @@ function resetGame() {
 // Inizializza il gioco
 loadGameData(); // Carica i crediti e il punteggio salvati
 loadPurchasedItems(); // Carica i temi acquistati
-applyStyle(localStorage.getItem("activeStyle") || "default-dark"); // Applica il tema attivo o il tema predefinito
+applyStyle(localStorage.getItem("activeStyle") || "purple"); // Cambia "dark" in "purple"
 generateGrid(); // Genera la griglia

@@ -106,7 +106,6 @@ h1 {
     left: 10%;
     width: 80%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
     z-index: 1000;
     justify-content: center;
     align-items: center;
@@ -162,7 +161,6 @@ h1 {
     border-radius: 10px;
     width: 80%;
     text-align: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .purchased-items h2 {
@@ -309,14 +307,56 @@ button.neon:hover {
     box-shadow: 0 0 15px #00ffcc, 0 0 30px #00d4ff;
 }
 
-/* Tema Dark Predefinito */
+/* Tema Dark */
+body.dark {
+    background: linear-gradient(135deg, #1a1a40, #3a3a80); /* Caratteristiche di default-dark */
+    color: #fff;
+}
+
+.card.dark {
+    background: linear-gradient(135deg, #444, #666); /* Caratteristiche di default-dark */
+    border: 2px solid #00d4ff;
+    box-shadow: 0 0 10px #00d4ff;
+    color: #fff;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card.dark:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px #00d4ff;
+}
+
+.modal-content.dark {
+    background: #1a1a40; /* Caratteristiche di default-dark */
+    color: #fff;
+    box-shadow: 0 0 10px #00d4ff;
+    border: 2px solid #00d4ff;
+}
+
+button.dark {
+    background: linear-gradient(135deg, #1a1a40, #3a3a80); /* Caratteristiche di default-dark */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    box-shadow: 0 0 10px #00d4ff;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+button.dark:hover {
+    background: linear-gradient(135deg, #3a3a80, #1a1a40); /* Caratteristiche di default-dark */
+    box-shadow: 0 0 15px #00d4ff;
+}
+
+/* Tema Default Dark */
 body.default-dark {
-    background: linear-gradient(135deg, #2b2b2b, #1e1e1e);
+    background: linear-gradient(135deg, #2b2b2b, #1e1e1e); /* Caratteristiche di dark */
     color: #dcdcdc;
 }
 
 .card.default-dark {
-    background: linear-gradient(135deg, #3a3a3a, #2b2b2b);
+    background: linear-gradient(135deg, #3a3a3a, #2b2b2b); /* Caratteristiche di dark */
     border: 2px solid #444;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     color: #dcdcdc;
@@ -329,14 +369,14 @@ body.default-dark {
 }
 
 .modal-content.default-dark {
-    background: #2b2b2b;
+    background: #2b2b2b; /* Caratteristiche di dark */
     color: #dcdcdc;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     border: 1px solid #444;
 }
 
 button.default-dark {
-    background: linear-gradient(135deg, #444, #555);
+    background: linear-gradient(135deg, #444, #555); /* Caratteristiche di dark */
     color: #dcdcdc;
     border: none;
     border-radius: 5px;
@@ -347,6 +387,48 @@ button.default-dark {
 }
 
 button.default-dark:hover {
-    background: linear-gradient(135deg, #555, #666);
+    background: linear-gradient(135deg, #555, #666); /* Caratteristiche di dark */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+}
+
+/* Tema Purple */
+body.purple {
+    background: linear-gradient(135deg, #1a1a40, #3a3a80); /* Caratteristiche di dark */
+    color: #fff;
+}
+
+.card.purple {
+    background: linear-gradient(135deg, #444, #666); /* Caratteristiche di dark */
+    border: 2px solid #00d4ff;
+    box-shadow: 0 0 10px #00d4ff;
+    color: #fff;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card.purple:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px #00d4ff;
+}
+
+.modal-content.purple {
+    background: #1a1a40; /* Caratteristiche di dark */
+    color: #fff;
+    box-shadow: 0 0 10px #00d4ff;
+    border: 2px solid #00d4ff;
+}
+
+button.purple {
+    background: linear-gradient(135deg, #1a1a40, #3a3a80); /* Caratteristiche di dark */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    box-shadow: 0 0 10px #00d4ff;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+button.purple:hover {
+    background: linear-gradient(135deg, #3a3a80, #1a1a40); /* Caratteristiche di dark */
+    box-shadow: 0 0 15px #00d4ff;
 }

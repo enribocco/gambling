@@ -221,7 +221,15 @@ function generateTransferLink(amount) {
 
         // Genera il link con l'importo incluso nella query string
         const link = `https://enribocco.github.io/gambling?transferAmount=${amount}`;
-        alert(`🎉 Link generato: ${link}`);
+        
+        // Copia automaticamente il link negli appunti
+        navigator.clipboard.writeText(link).then(() => {
+            alert(`🎉 Link generato e copiato negli appunti: ${link}`);
+        }).catch(err => {
+            alert(`🎉 Link generato: ${link}\n❌ Impossibile copiare il link negli appunti.`);
+            console.error("Errore durante la copia negli appunti:", err);
+        });
+
         return link;
     } else {
         alert("😢 Non hai abbastanza crediti per generare questo link.");

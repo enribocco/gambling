@@ -433,6 +433,33 @@ button.purple:hover {
     box-shadow: 0 0 15px #00d4ff;
 }
 
+#transfer-section {
+    margin: 20px auto;
+    text-align: center;
+}
+
+#transfer-amount {
+    padding: 5px;
+    font-size: 1rem;
+    width: 150px;
+    margin-right: 10px;
+}
+
+#generate-link-button {
+    padding: 5px 10px;
+    font-size: 1rem;
+    background: #00d4ff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#generate-link-button:hover {
+    background: #00a3cc;
+}
+
 /* Media query per dispositivi mobili */
 @media (max-width: 768px) {
     body {

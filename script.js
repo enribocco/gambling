@@ -204,8 +204,53 @@ function resetGame() {
     generateGrid(); // Rigenera la griglia senza resettare il punteggio
 }
 
+// Oggetto per memorizzare i link generati
+const transferLinks = {};
+
+// Genera un link per trasferire crediti
+function generateTransferLink(amount) {
+    if (credits >= amount && amount > 0) {
+        const uuid = crypto.randomUUID(); // Genera un identificatore univoco
+        transferLinks[uuid] = amount; // Salva l'importo associato al link
+        credits -= amount; // Rimuovi i crediti dal giocatore
+        updateCreditsDisplay(); // Aggiorna la visualizzazione dei crediti
+        saveGameData(); // Salva i dati aggiornati
+
+        const link = `${window.location.origin}?transfer=${uuid}`;
+        alert(`🎉 Link generato: ${link}`);
+        return link;
+    } else {
+        alert("😢 Non hai abbastanza crediti per generare questo link.");
+        return null;
+    }
+}
+
+// Gestisce il trasferimento dei crediti quando si utilizza un link
+function handleTransferLink() {
+    const params = new URLSearchParams(window.location.search);
+    const transferId = params.get("transfer");
+
+    if (transferId && transferLinks[transferId]) {
+        const amount = transferLinks[transferId];
+        credits += amount; // Aggiungi i crediti al giocatore
+        updateCreditsDisplay(); // Aggiorna la visualizzazione dei crediti
+        saveGameData(); // Salva i dati aggiornati
+
+        delete transferLinks[transferId]; // Rimuovi il link per evitare riutilizzi
+        alert(`🎉 Hai ricevuto ${amount}€!`);
+    }
+}
+
+// Chiama la funzione per gestire il trasferimento all'avvio della pagina
+handleTransferLink();
+
 // Inizializza il gioco
 loadGameData(); // Carica i crediti e il punteggio salvati
 loadPurchasedItems(); // Carica i temi acquistati
 applyStyle(localStorage.getItem("activeStyle") || "purple"); // Cambia "dark" in "purple"
 generateGrid(); // Genera la griglia
+
+document.getElementById("generate-link-button").addEventListener("click", () => {
+    const amount = parseInt(document.getElementById("transfer-amount").value, 10);
+    generateTransferLink(amount);
+});

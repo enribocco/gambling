@@ -238,7 +238,14 @@ function handleTransferLink() {
 
     if (transferId && transferLinks[transferId]) {
         const amount = transferLinks[transferId];
-        credits += amount; // Aggiungi i crediti al giocatore
+
+        // Recupera i crediti salvati nel localStorage
+        const savedCredits = localStorage.getItem("credits");
+        if (savedCredits !== null) {
+            credits = parseInt(savedCredits, 10); // Usa i crediti salvati
+        }
+
+        credits += amount; // Aggiungi i crediti trasferiti
         updateCreditsDisplay(); // Aggiorna la visualizzazione dei crediti
         saveGameData(); // Salva i dati aggiornati
 

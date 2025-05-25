@@ -183,23 +183,87 @@ h1 {
     background: #ccc;
 }
 
-/* Tema Light */
+/* Tema Light Migliorato */
 body.light {
-    background: linear-gradient(135deg, #f0f8ff, #e6e6fa);
+    background: linear-gradient(135deg, #f9f9f9, #e6e6e6);
     color: #333;
+    text-shadow: none;
 }
 
 .card.light {
-    background: linear-gradient(135deg, #ffffff, #f0f0f0);
+    background: linear-gradient(135deg, #501919, #f7f7f7);
     border: 2px solid #cccccc;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     color: #333;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card.light:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.card.light.revealed {
+    background: linear-gradient(135deg, #fffbcc, #fff3a3);
+    color: #333;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .modal-content.light {
     background: #ffffff;
     color: #333;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 1px solid #cccccc;
+}
+
+button.light {
+    background: linear-gradient(135deg, #f7f7f7, #e6e6e6);
+    color: #333;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+button.light:hover {
+    background: linear-gradient(135deg, #e6e6e6, #dcdcdc);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.modal-content.light h2 {
+    color: #444;
+}
+
+.shop-item.light {
+    background: #f7f7f7;
+    color: #333;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+.shop-item.light:hover {
+    background: #e6e6e6;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.purchased-item.light {
+    background: #f7f7f7;
+    color: #333;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+.purchased-item.light:hover {
+    background: #e6e6e6;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Tema Neon */

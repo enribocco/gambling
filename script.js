@@ -104,7 +104,8 @@ shopItems.forEach(item => {
             credits -= cost;
             updateCreditsDisplay();
             addPurchasedItem(style); // Aggiungi l'oggetto acquistato
-            alert(`🎉 Hai acquistato il tema ${style}!`);
+            applyStyle(style); // Applica immediatamente il tema acquistato
+            alert(`🎉 Hai acquistato e attivato il tema ${style}!`);
         } else {
             alert("😢 Non hai abbastanza crediti per acquistare questo tema.");
         }

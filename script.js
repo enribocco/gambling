@@ -215,15 +215,12 @@ function saveTransferLinks() {
 // Genera un link per trasferire crediti
 function generateTransferLink(amount) {
     if (credits >= amount && amount > 0) {
-        const uuid = crypto.randomUUID(); // Genera un identificatore univoco
-        transferLinks[uuid] = amount; // Salva l'importo associato al link
         credits -= amount; // Rimuovi i crediti dal giocatore
         updateCreditsDisplay(); // Aggiorna la visualizzazione dei crediti
         saveGameData(); // Salva i dati aggiornati
-        saveTransferLinks(); // Salva i link aggiornati
 
-        // Modifica il dominio per puntare a quello esterno
-        const link = `https://enribocco.github.io/gambling?transfer=${uuid}`;
+        // Genera il link con l'importo incluso nella query string
+        const link = `https://enribocco.github.io/gambling?transferAmount=${amount}`;
         alert(`🎉 Link generato: ${link}`);
         return link;
     } else {
@@ -235,24 +232,16 @@ function generateTransferLink(amount) {
 // Gestisce il trasferimento dei crediti quando si utilizza un link
 function handleTransferLink() {
     const params = new URLSearchParams(window.location.search);
-    const transferId = params.get("transfer");
+    const transferAmount = parseInt(params.get("transferAmount"), 10);
 
-    if (transferId && transferLinks[transferId]) {
-        const amount = transferLinks[transferId];
-
-        // Recupera i crediti salvati nel localStorage
-        const savedCredits = localStorage.getItem("credits");
-        if (savedCredits !== null) {
-            credits = parseInt(savedCredits, 10); // Usa i crediti salvati
-        }
-
-        credits += amount; // Aggiungi i crediti trasferiti
+    if (transferAmount && transferAmount > 0) {
+        credits += transferAmount; // Aggiungi i crediti trasferiti
         updateCreditsDisplay(); // Aggiorna la visualizzazione dei crediti
         saveGameData(); // Salva i dati aggiornati
 
-        delete transferLinks[transferId]; // Rimuovi il link per evitare riutilizzi
-        saveTransferLinks(); // Salva i link aggiornati
-        alert(`🎉 Hai ricevuto ${amount}€!`);
+        alert(`🎉 Hai ricevuto ${transferAmount}€!`);
+        // Rimuovi il parametro dalla URL per evitare trasferimenti multipli
+        window.history.replaceState({}, document.title, window.location.pathname);
     }
 }
 

@@ -222,7 +222,8 @@ function generateTransferLink(amount) {
         saveGameData(); // Salva i dati aggiornati
         saveTransferLinks(); // Salva i link aggiornati
 
-        const link = `${window.location.origin}?transfer=${uuid}`;
+        // Modifica il dominio per puntare a quello esterno
+        const link = `https://enribocco.github.io/gambling?transfer=${uuid}`;
         alert(`🎉 Link generato: ${link}`);
         return link;
     } else {

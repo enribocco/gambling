@@ -204,8 +204,13 @@ function resetGame() {
     generateGrid(); // Rigenera la griglia senza resettare il punteggio
 }
 
-// Oggetto per memorizzare i link generati
-const transferLinks = {};
+// Recupera i link di trasferimento salvati nel localStorage
+const transferLinks = JSON.parse(localStorage.getItem("transferLinks")) || {};
+
+// Salva i link di trasferimento nel localStorage
+function saveTransferLinks() {
+    localStorage.setItem("transferLinks", JSON.stringify(transferLinks));
+}
 
 // Genera un link per trasferire crediti
 function generateTransferLink(amount) {
@@ -215,6 +220,7 @@ function generateTransferLink(amount) {
         credits -= amount; // Rimuovi i crediti dal giocatore
         updateCreditsDisplay(); // Aggiorna la visualizzazione dei crediti
         saveGameData(); // Salva i dati aggiornati
+        saveTransferLinks(); // Salva i link aggiornati
 
         const link = `${window.location.origin}?transfer=${uuid}`;
         alert(`🎉 Link generato: ${link}`);
@@ -237,6 +243,7 @@ function handleTransferLink() {
         saveGameData(); // Salva i dati aggiornati
 
         delete transferLinks[transferId]; // Rimuovi il link per evitare riutilizzi
+        saveTransferLinks(); // Salva i link aggiornati
         alert(`🎉 Hai ricevuto ${amount}€!`);
     }
 }

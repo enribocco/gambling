@@ -119,9 +119,20 @@ shopItems.forEach(item => {
             updateCreditsDisplay();
             addPurchasedItem(style); // Aggiungi l'oggetto acquistato
             applyStyle(style); // Applica immediatamente il tema acquistato
-            alert(`🎉 Hai acquistato e attivato il tema ${style}!`);
-        } else {
-            alert("😢 Non hai abbastanza crediti per acquistare questo tema.");
+        }
+    });
+});
+
+// Acquista un boost
+shopBoosts.forEach(boost => {
+    boost.addEventListener("click", () => {
+        const boostType = boost.dataset.boost;
+        const cost = parseInt(boost.dataset.cost, 10);
+
+        if (credits >= cost) {
+            credits -= cost;
+            updateCreditsDisplay();
+            activateBoost(boostType);
         }
     });
 });
@@ -272,22 +283,6 @@ function handleTransferLink() {
 
 // Chiama la funzione per gestire il trasferimento all'avvio della pagina
 handleTransferLink();
-
-// Acquista un boost
-shopBoosts.forEach(boost => {
-    boost.addEventListener("click", () => {
-        const boostType = boost.dataset.boost;
-        const cost = parseInt(boost.dataset.cost, 10);
-
-        if (credits >= cost) {
-            credits -= cost;
-            updateCreditsDisplay();
-            activateBoost(boostType);
-        } else {
-            alert("😢 Non hai abbastanza crediti per acquistare questo boost.");
-        }
-    });
-});
 
 // Attiva un boost
 function activateBoost(boostType) {

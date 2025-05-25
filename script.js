@@ -8,6 +8,7 @@ let score = 0; // Punteggio del giocatore
 let credits = 500; // Crediti iniziali del giocatore
 let openedCards = 0; // Contatore delle caselle aperte
 let firstCardOpened = false; // Indica se la prima casella è stata aperta
+let isDoublePrizeActive = false; // Stato del boost "Doppio Valore Sacchetti"
 
 // Elementi DOM
 const scratchCard = document.getElementById("scratch-card");
@@ -23,6 +24,13 @@ const purchasedButton = document.getElementById("purchased-button");
 const purchasedModal = document.getElementById("purchased-modal");
 const closePurchased = document.getElementById("close-purchased");
 const purchasedList = document.getElementById("purchased-list");
+
+// Elementi DOM per i boost
+const shopBoosts = document.querySelectorAll(".shop-boost");
+
+// Elementi DOM per il timer del boost
+const boostTimer = document.getElementById("boost-timer");
+const boostTimeRemaining = document.getElementById("boost-time-remaining");
 
 // Apre la finestra dello shop
 shopButton.addEventListener("click", () => {
@@ -182,7 +190,10 @@ function revealCard() {
 
 // Calcola il premio alla fine
 function calculatePrize() {
-    const winnings = foundPrizes * 10; // Ogni premio vale 10€
+    let winnings = foundPrizes * 10; // Ogni premio vale 10€
+    if (isDoublePrizeActive) {
+        winnings *= 2; // Raddoppia il valore dei premi se il boost è attivo
+    }
     credits += winnings; // Aggiunge i crediti vinti
     saveGameData(); // Salva i dati aggiornati
     updateCreditsDisplay();
@@ -261,6 +272,43 @@ function handleTransferLink() {
 
 // Chiama la funzione per gestire il trasferimento all'avvio della pagina
 handleTransferLink();
+
+// Acquista un boost
+shopBoosts.forEach(boost => {
+    boost.addEventListener("click", () => {
+        const boostType = boost.dataset.boost;
+        const cost = parseInt(boost.dataset.cost, 10);
+
+        if (credits >= cost) {
+            credits -= cost;
+            updateCreditsDisplay();
+            activateBoost(boostType);
+        } else {
+            alert("😢 Non hai abbastanza crediti per acquistare questo boost.");
+        }
+    });
+});
+
+// Attiva un boost
+function activateBoost(boostType) {
+    if (boostType === "double-prize") {
+        isDoublePrizeActive = true;
+        boostTimer.style.display = "block"; // Mostra il timer
+        let timeLeft = 30; // Durata del boost in secondi
+        boostTimeRemaining.textContent = timeLeft;
+
+        const timerInterval = setInterval(() => {
+            timeLeft--;
+            boostTimeRemaining.textContent = timeLeft;
+
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval); // Ferma il timer
+                isDoublePrizeActive = false;
+                boostTimer.style.display = "none"; // Nascondi il timer
+            }
+        }, 1000); // Aggiorna ogni secondo
+    }
+}
 
 // Inizializza il gioco
 loadGameData(); // Carica i crediti e il punteggio salvati

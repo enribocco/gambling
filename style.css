@@ -153,6 +153,22 @@ h1 {
     background: #00a3cc;
 }
 
+.shop-boost {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    background: #ff8800;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.shop-boost:hover {
+    background: #cc6e00;
+}
+
 /* Sezione oggetti acquistati */
 .purchased-items {
     margin: 20px auto;
@@ -458,6 +474,11 @@ button.purple:hover {
 
 #generate-link-button:hover {
     background: #00a3cc;
+}
+
+#boost-timer {
+    font-weight: bold;
+    text-shadow: 0 0 5px #ff8800, 0 0 10px #ff8800;
 }
 
 /* Media query per dispositivi mobili */

@@ -30,6 +30,11 @@
                 <button class="shop-item" data-style="purple" data-cost="100">Tema Purple - 100€</button>
                 <button class="shop-item" data-style="neon" data-cost="200">Tema Neon - 200€</button>
             </div>
+            <h2>Boost</h2>
+            <p>Acquista potenziamenti temporanei per migliorare il tuo gioco!</p>
+            <div id="shop-boosts">
+                <button class="shop-boost" data-boost="double-prize" data-cost="1000">Doppio Valore Sacchetti (30s) - 1000€</button>
+            </div>
         </div>
     </div>
 
@@ -42,6 +47,11 @@
         </div>
     </div>
 
+    <div id="boost-timer" style="display: none; margin-top: 10px; font-size: 1.2rem; color: #ff8800;">
+        ⏳ Boost attivo: <span id="boost-time-remaining">30</span>s
+    </div>
+
+    <p>Regala dei soldi ad un tuo amico!</p>
     <div id="transfer-section">
         <input type="number" id="transfer-amount" placeholder="Inserisci importo" />
         <button id="generate-link-button">Genera Link</button>

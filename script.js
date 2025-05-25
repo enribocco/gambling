@@ -263,21 +263,34 @@ function generateTransferLink(amount) {
 function handleTransferLink() {
     const params = new URLSearchParams(window.location.search);
     const transferAmount = parseInt(params.get("transferAmount"), 10);
+    const linkId = params.get("transferAmount"); // Usa l'importo come identificatore unico del link
+
+    // Recupera i link riscattati dal localStorage
+    const redeemedLinks = JSON.parse(localStorage.getItem("redeemedLinks")) || [];
 
     if (transferAmount && transferAmount > 0) {
-        // Recupera i crediti salvati nel localStorage
-        const savedCredits = localStorage.getItem("credits");
-        if (savedCredits !== null) {
-            credits = parseInt(savedCredits, 10); // Usa i crediti salvati
+        if (redeemedLinks.includes(linkId)) {
+            alert("❌ Questo link è già stato riscattato.");
+        } else {
+            // Recupera i crediti salvati nel localStorage
+            const savedCredits = localStorage.getItem("credits");
+            if (savedCredits !== null) {
+                credits = parseInt(savedCredits, 10); // Usa i crediti salvati
+            }
+
+            credits += transferAmount; // Aggiungi i crediti trasferiti
+            updateCreditsDisplay(); // Aggiorna la visualizzazione dei crediti
+            saveGameData(); // Salva i dati aggiornati
+
+            alert(`🎉 Hai ricevuto ${transferAmount}€!`);
+
+            // Segna il link come riscattato
+            redeemedLinks.push(linkId);
+            localStorage.setItem("redeemedLinks", JSON.stringify(redeemedLinks));
+
+            // Rimuovi il parametro dalla URL per evitare trasferimenti multipli
+            window.history.replaceState({}, document.title, window.location.pathname);
         }
-
-        credits += transferAmount; // Aggiungi i crediti trasferiti
-        updateCreditsDisplay(); // Aggiorna la visualizzazione dei crediti
-        saveGameData(); // Salva i dati aggiornati
-
-        alert(`🎉 Hai ricevuto ${transferAmount}€!`);
-        // Rimuovi il parametro dalla URL per evitare trasferimenti multipli
-        window.history.replaceState({}, document.title, window.location.pathname);
     }
 }
 

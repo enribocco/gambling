@@ -241,8 +241,9 @@ function generateTransferLink(amount) {
         updateCreditsDisplay(); // Aggiorna la visualizzazione dei crediti
         saveGameData(); // Salva i dati aggiornati
 
-        // Genera il link con l'importo incluso nella query string
-        const link = `https://enribocco.github.io/gambling?transferAmount=${amount}`;
+        // Genera un identificatore univoco per il link
+        const uniqueId = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+        const link = `https://enribocco.github.io/gambling?transferAmount=${amount}&id=${uniqueId}`;
         
         // Copia automaticamente il link negli appunti
         navigator.clipboard.writeText(link).then(() => {
@@ -263,12 +264,12 @@ function generateTransferLink(amount) {
 function handleTransferLink() {
     const params = new URLSearchParams(window.location.search);
     const transferAmount = parseInt(params.get("transferAmount"), 10);
-    const linkId = params.get("transferAmount"); // Usa l'importo come identificatore unico del link
+    const linkId = params.get("id"); // Usa l'identificatore univoco del link
 
     // Recupera i link riscattati dal localStorage
     const redeemedLinks = JSON.parse(localStorage.getItem("redeemedLinks")) || [];
 
-    if (transferAmount && transferAmount > 0) {
+    if (transferAmount && transferAmount > 0 && linkId) {
         if (redeemedLinks.includes(linkId)) {
             alert("❌ Questo link è già stato riscattato.");
         } else {

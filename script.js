@@ -227,7 +227,7 @@ function revealCard() {
 function calculatePrize() {
     let winnings = foundPrizes * 10; // Ogni premio vale 10€
     if (isDoublePrizeActive) {
-        winnings *= 2; // Raddoppia il valore dei premi se il boost è attivo
+        winnings *= 10; // Raddoppia il valore dei premi se il boost è attivo
     }
     credits += winnings; // Aggiunge i crediti vinti
     saveGameData(); // Salva i dati aggiornati

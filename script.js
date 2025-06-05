@@ -327,7 +327,7 @@ function activateBoost(boostType) {
     if (boostType === "double-prize") {
         isDoublePrizeActive = true;
         boostTimer.style.display = "block"; // Mostra il timer
-        let timeLeft = 30; // Durata del boost in secondi
+        let timeLeft = 60; // Durata del boost in secondi
         boostTimeRemaining.textContent = timeLeft;
 
         const timerInterval = setInterval(() => {
